@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 16:10:52 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:44:07 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,20 @@ void	put_xpm_file_to_window(t_cub3d *cub3d, char *path, int x, int y)
 	img.img = mlx_xpm_file_to_image(cub3d->mlx, path, &img.width, &img.height);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, img.img, x, y);
 	mlx_destroy_image(cub3d->mlx, img.img);
+}
+
+void img_transparent(t_cub3d *cub3d, t_img *img)
+{
+	int		i;
+	int		j;
+	int		color;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = -1;
+		while (++j < WIDTH)
+			my_mlx_pixel_put(img, j, i, 0xFFFFFFFF);
+		i++;
+	}
 }

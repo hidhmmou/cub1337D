@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:34:46 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/01 17:09:27 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:43:19 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ int     mlx_mouse_hide();
 int     mlx_mouse_show();
 int     mlx_mouse_move();
 float   intersect_dist(t_cub3d *cub3d);
+int     mouse_move(int x, int y, t_cub3d *cub3d);
+void    img_transparent(t_cub3d *cub3d, t_img *img);
 #endif
