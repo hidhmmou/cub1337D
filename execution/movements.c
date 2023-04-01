@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:16:13 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/03/30 17:42:51 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:56:49 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int		move_up(t_cub3d *cub3d)
 	{
 		pixel_x -= cub3d->draw->increment_x;
 		pixel_y -= cub3d->draw->increment_y;
-		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x, SIZE))
+		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x - 10 * cub3d->draw->increment_x, SIZE))
 			cub3d->map->player.x = pixel_x;
-		if (!check_hit_wall(cub3d, pixel_y, cub3d->map->player.x, SIZE))
+		if (!check_hit_wall(cub3d, pixel_y - 10 * cub3d->draw->increment_y, cub3d->map->player.x, SIZE))
 			cub3d->map->player.y = pixel_y;
 	}
 	return (moves_nbr);
@@ -80,9 +80,9 @@ int		move_down(t_cub3d *cub3d)
 	{
 		pixel_x += cub3d->draw->increment_x;
 		pixel_y += cub3d->draw->increment_y;
-		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x, SIZE))
+		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x + 10 * cub3d->draw->increment_x, SIZE))
 			cub3d->map->player.x = pixel_x;
-		if (!check_hit_wall(cub3d, pixel_y, cub3d->map->player.x, SIZE))
+		if (!check_hit_wall(cub3d, pixel_y + 10 * cub3d->draw->increment_y, cub3d->map->player.x, SIZE))
 			cub3d->map->player.y = pixel_y;
 	}
 	return (moves_nbr);
@@ -104,9 +104,9 @@ int	move_right(t_cub3d *cub3d)
 	{
 		pixel_x += cub3d->draw->increment_x;
 		pixel_y += cub3d->draw->increment_y;
-		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x, SIZE))
+		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x + 10 * cub3d->draw->increment_x, SIZE))
 			cub3d->map->player.x = pixel_x;
-		if (!check_hit_wall(cub3d, pixel_y, cub3d->map->player.x, SIZE))
+		if (!check_hit_wall(cub3d, pixel_y + 10 * cub3d->draw->increment_y, cub3d->map->player.x, SIZE))
 			cub3d->map->player.y = pixel_y;
 	}
 	return (moves_nbr);
@@ -127,9 +127,9 @@ int		move_left(t_cub3d *cub3d)
 	{
 		pixel_x += cub3d->draw->increment_x;
 		pixel_y += cub3d->draw->increment_y;
-		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x, SIZE))
+		if (!check_hit_wall(cub3d, cub3d->map->player.y, pixel_x + 10 * cub3d->draw->increment_x, SIZE))
 			cub3d->map->player.x = pixel_x;
-		if (!check_hit_wall(cub3d, pixel_y, cub3d->map->player.x, SIZE))
+		if (!check_hit_wall(cub3d, pixel_y + 10 * cub3d->draw->increment_y, cub3d->map->player.x, SIZE))
 			cub3d->map->player.y = pixel_y;
 	}
 	return (moves_nbr);

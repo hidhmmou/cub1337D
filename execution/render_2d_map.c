@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:42:34 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/03/30 16:09:25 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:48:01 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ int get_color(char c)
 		return (0xFF00FF00);
 	return (0);
 }
-
-
-// fdc500
 
 void	put_pixel_square(t_cub3d *cub3d, int x, int y, int color)
 {
