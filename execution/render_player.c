@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 17:50:50 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 22:11:09 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_hit_wall(t_cub3d *cub3d, float pixel_y, float pixel_x, int size)
 
 void	init_draw(t_cub3d *cub3d)
 {
-	cub3d->draw->radiant = cub3d->draw->ray_angle * P / 180;
+	cub3d->draw->radiant = to_radian(cub3d->draw->ray_angle);
 	cub3d->draw->dx = 500 * cos(cub3d->draw->radiant);
 	cub3d->draw->dy = 500 * sin(cub3d->draw->radiant) * -1;
 	if (abs(cub3d->draw->dx) > abs(cub3d->draw->dy))
@@ -131,7 +131,6 @@ void	render_player(t_cub3d *cub3d)
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
 	while (++i <= WIDTH)
 		cast_ray(cub3d);
-	//cast_mid_ray(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img->img, 0, 0);
 	if (cub3d->weapon == 1)
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img_weapon->img, WIDTH / 2 - WEAPON_W / 2, HEIGHT - WEAPON_H);

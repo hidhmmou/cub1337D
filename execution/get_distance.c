@@ -2,10 +2,9 @@
 #include <limits.h>
 float normligize_angle(float angle)
 {
-    while (angle < 0)
-        angle += 2 * M_PI;
-    while (angle > 2 * M_PI)
-        angle -= 2 * M_PI;
+    angle = remainder(angle ,(2.0 * M_PI));
+    if (angle < 0)
+        angle += (2 * M_PI);
     return (angle);
 }
 
@@ -29,10 +28,13 @@ int has_wall_at(t_cub3d *cub3d, float x, float y)
 
 float intersect_dist(t_cub3d *cub3d)
 {
-    cub3d->draw->radiant = normligize_angle(cub3d->draw->radiant);
-    int isRayFacingDown = cub3d->draw->radiant > 0 && cub3d->draw->radiant < M_PI;
+    float angle;
+
+    angle = normligize_angle(cub3d->draw->radiant + M_PI);
+    //angle = cub3d->draw->radiant;
+    int isRayFacingDown = angle > 0 && angle < M_PI;
     int isRayFacingUp = !isRayFacingDown;
-    int isRayFacingRight = cub3d->draw->radiant < 0.5 * M_PI || cub3d->draw->radiant > 1.5 * M_PI;
+    int isRayFacingRight = angle < 0.5 * M_PI || angle > 1.5 * M_PI;
     int isRayFacingLeft = !isRayFacingRight;
 
     float xintercept, yintercept;
@@ -48,13 +50,13 @@ float intersect_dist(t_cub3d *cub3d)
     yintercept += isRayFacingDown ? SIZE : 0;
     
     // find the x coordinate of the first (horizontal) grid intersection
-    xintercept = cub3d->map->player.x + (yintercept - cub3d->map->player.y) / tan(cub3d->draw->radiant);
+    xintercept = cub3d->map->player.x + (yintercept - cub3d->map->player.y) / tan(angle);
 
     // calculate the increment xstep and ystep
     ystep = SIZE;
     ystep *= isRayFacingUp ? -1 : 1;
 
-    xstep = SIZE / tan(cub3d->draw->radiant);
+    xstep = SIZE / tan(angle);
     xstep *= (isRayFacingLeft && xstep > 0) ? -1 : 1;
     xstep *= (isRayFacingRight && xstep < 0) ? -1 : 1;
 
@@ -92,13 +94,13 @@ float intersect_dist(t_cub3d *cub3d)
     xintercept += isRayFacingRight ? SIZE : 0;
 
     // find the y coordinate of the first (vertical) grid intersection
-    yintercept = cub3d->map->player.y + (xintercept - cub3d->map->player.x) * tan(cub3d->draw->radiant);
+    yintercept = cub3d->map->player.y + (xintercept - cub3d->map->player.x) * tan(angle);
 
     // calculate the increment xstep and ystep  
     xstep = SIZE;
     xstep *= isRayFacingLeft ? -1 : 1;
 
-    ystep = SIZE * tan(cub3d->draw->radiant);
+    ystep = SIZE * tan(angle);
     ystep *= (isRayFacingUp && ystep > 0) ? -1 : 1;
     ystep *= (isRayFacingDown && ystep < 0) ? -1 : 1;
 

@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 18:44:07 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:40:49 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	cast_mid_ray(t_cub3d *cub3d)
         cub3d->draw->draw_start = 0;
     if (cub3d->draw->draw_end >= HEIGHT)
         cub3d->draw->draw_end = HEIGHT - 1;
-	cub3d->draw->x++;
+	cub3d->draw->x--;
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)

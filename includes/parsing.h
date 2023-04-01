@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 17:31:04 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 22:07:52 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define ROTATE_ANGLE 5
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define P 3.14159265
-# define SPEED 16
+# define SPEED 8
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
 # define MIDDLE_CLICK 3
@@ -224,4 +224,5 @@ void	get_wall_color(t_cub3d *cub3d, float y, float x);
 int		release(int key, t_cub3d *cub3d);
 int		loop(t_cub3d *cub3d);
 int		mouse_move(int x, int y, t_cub3d *cub3d);
+float to_radian(float angle);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:16:13 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/01 18:45:49 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 23:39:59 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	init_movement(t_cub3d *cub3d, int to_add)
 {
-	cub3d->draw->radiant = (cub3d->map->player.angle + to_add) * PI / 180;
-	cub3d->draw->dx = 500 * cos(cub3d->draw->radiant) * -1;
-	cub3d->draw->dy = 500 * sin(cub3d->draw->radiant);
+	//cub3d->draw->radiant = normligize_angle(to_radian(cub3d->map->player.angle + to_add));
+	cub3d->draw->radiant = to_radian(cub3d->map->player.angle + to_add);
+	cub3d->draw->dx = SPEED * cos(cub3d->draw->radiant);
+	cub3d->draw->dy = SPEED * sin(cub3d->draw->radiant);
 	if (abs(cub3d->draw->dx) > abs(cub3d->draw->dy))
 		cub3d->draw->pixel_nbr = abs(cub3d->draw->dx);
 	else
