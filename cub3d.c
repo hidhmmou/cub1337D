@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:05:32 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 21:42:20 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/01 23:58:34 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parsing(t_cub3d **cub3d, char **av, int ac)
 
 void	executing(t_cub3d *cub3d)
 {
-	cub3d->draw->x = WIDTH;
+	cub3d->draw->x = 0;
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
 	cub3d->win_height = --cub3d->map->len * SIZE;
 	cub3d->win_width = --cub3d->map->max_len * SIZE;

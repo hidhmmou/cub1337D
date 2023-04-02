@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:26:22 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 17:10:43 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:00:56 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int release(int key, t_cub3d *cub3d)
 int	loop(t_cub3d *cub3d)
 {
 	if (cub3d->keys[LEFT] && ++cub3d->change)
-		cub3d->map->player.angle += ROTATE_ANGLE;
-	if (cub3d->keys[RIGHT] && ++cub3d->change)
 		cub3d->map->player.angle -= ROTATE_ANGLE;
+	if (cub3d->keys[RIGHT] && ++cub3d->change)
+		cub3d->map->player.angle += ROTATE_ANGLE;
 	if (cub3d->keys[D])
 		cub3d->change = move_right(cub3d);
 	if (cub3d->keys[A])

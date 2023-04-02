@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 22:11:09 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:04:28 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_draw(t_cub3d *cub3d)
 {
 	cub3d->draw->radiant = to_radian(cub3d->draw->ray_angle);
 	cub3d->draw->dx = 500 * cos(cub3d->draw->radiant);
-	cub3d->draw->dy = 500 * sin(cub3d->draw->radiant) * -1;
+	cub3d->draw->dy = 500 * sin(cub3d->draw->radiant);
 	if (abs(cub3d->draw->dx) > abs(cub3d->draw->dy))
 		cub3d->draw->pixel_nbr = abs(cub3d->draw->dx);
 	else
@@ -58,7 +58,7 @@ void draw_wall(t_cub3d *cub3d)
 	//my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, 0);
 	while (++i < HEIGHT)
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, rgb_to_int(*cub3d->map->floor_color));
-	cub3d->draw->x--;
+	cub3d->draw->x++;
 }
 
 void calc(t_cub3d *cub3d)
@@ -127,7 +127,7 @@ void	render_player(t_cub3d *cub3d)
 	int 	i;
 
 	i = -1;
-	cub3d->draw->x = WIDTH;
+	cub3d->draw->x = 0;
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
 	while (++i <= WIDTH)
 		cast_ray(cub3d);

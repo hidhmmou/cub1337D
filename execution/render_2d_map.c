@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:42:34 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 22:11:18 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:08:54 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,11 @@ void	mini_map(t_cub3d *cub3d)
 		cub3d->map->minimap_size = MIN(WIDTH / cub3d->map->max_len, HEIGHT / cub3d->map->len);
 	render_background(cub3d);
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
+	cub3d->draw->ray_angle += 180;
 	while (++i <= WIDTH)
 		render_view(cub3d, 0);
 	cub3d->draw->ray_angle = cub3d->map->player.angle;
+	cub3d->draw->ray_angle += 180;
 	render_view(cub3d, 1);
 }
 
