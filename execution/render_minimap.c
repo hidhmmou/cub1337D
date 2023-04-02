@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_2d_map.c                                    :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:42:34 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 00:08:54 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:45:26 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,46 @@ void	render_background(t_cub3d *cub3d)
 	}
 }
 
+void	erase_minimap(t_cub3d *cub3d)
+{
+	int x;
+	int y;
+
+	x = 99 + cub3d->map->player.x / (float)SIZE * (float)cub3d->map->minimap_size;
+	while (++x < WIDTH)
+	{
+		y = -1;
+		while (++y < HEIGHT)
+			my_mlx_pixel_put(cub3d->img_2d, x, y, 0xFFFF00FF);
+	}
+	x = -1;
+	while (++x < WIDTH)
+	{
+		y = 99 + cub3d->map->player.y / (float)SIZE * (float)cub3d->map->minimap_size;
+		while (++y < HEIGHT)
+			my_mlx_pixel_put(cub3d->img_2d, x, y, 0xFFFF00FF);
+	}
+}
+
+void show_2d_map(t_cub3d *cub3d)
+{
+	int x;
+	int y;
+
+	if (cub3d->minimap > 0)
+	{
+		x = 100 - cub3d->map->player.x / (float)SIZE * (float)cub3d->map->minimap_size;
+		y = 100 - cub3d->map->player.y / (float)SIZE * (float)cub3d->map->minimap_size;
+		erase_minimap(cub3d);
+		mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img_2d->img,  x, y);
+		return ;
+	}
+	x = WIDTH / 2 - cub3d->map->minimap_size * cub3d->map->max_len / 2;
+	y = HEIGHT / 2 - cub3d->map->minimap_size * cub3d->map->len / 2;
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img_2d->img, x, y);
+	put_xpm_file_to_window(cub3d, "textures/back.xpm", 32, 32);
+}
+
 void	mini_map(t_cub3d *cub3d)
 {
 	int i;
@@ -116,9 +156,9 @@ void	mini_map(t_cub3d *cub3d)
 	render_view(cub3d, 1);
 }
 
-void	render_map_2d(t_cub3d *cub3d)
+void	render(t_cub3d *cub3d)
 {
 	mlx_clear_window(cub3d->mlx, cub3d->win);
 	mini_map(cub3d);
-	render_player(cub3d);
+	render_scene(cub3d);
 }

@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:26:22 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 00:40:28 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:37:44 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int release(int key, t_cub3d *cub3d)
 	else if (key == SHIFT)
 	{
 		cub3d->map->player.angle -= 180;
-		render_map_2d(cub3d);
+		render(cub3d);
 	}
 	return (1);
 }
@@ -62,7 +62,7 @@ int	loop(t_cub3d *cub3d)
 	if (cub3d->change)
 	{
 		cub3d->change = 0;
-		render_map_2d(cub3d);
+		render(cub3d);
 	}
 	return (1);
 }
@@ -86,7 +86,7 @@ void	weapon(t_cub3d *cub3d)
 		cub3d->img_weapon->img = mlx_xpm_file_to_image(cub3d->mlx, "textures/gun/0.xpm", &cub3d->img_weapon->width, &cub3d->img_weapon->height);
 	else
 		mlx_destroy_image(cub3d->mlx, cub3d->img_weapon->img);
-	render_map_2d(cub3d);
+	render(cub3d);
 }
 
 int	press(int key, t_cub3d *cub3d)
@@ -97,7 +97,7 @@ int	press(int key, t_cub3d *cub3d)
 	if (key == SPACE)
 	{
 		cub3d->start++;
-		render_map_2d(cub3d);
+		render(cub3d);
 	}
 	if (!cub3d->start)
 		return (1);
@@ -117,14 +117,14 @@ int	press(int key, t_cub3d *cub3d)
 	{
 		img_transparent(cub3d, cub3d->img_2d);
 		cub3d->minimap *= -1;
-		render_map_2d(cub3d);
+		render(cub3d);
 	}
 	else if (key == CTRL)
 		show_hide_mouse(cub3d);
 	else if (key == SHIFT)
 	{
 		cub3d->map->player.angle += 180;
-		render_map_2d(cub3d);
+		render(cub3d);
 	}
 	else if (key == NUM_1)
 		weapon(cub3d);

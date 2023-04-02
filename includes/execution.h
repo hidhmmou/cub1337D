@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:34:46 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/02 01:15:31 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:45:49 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 int     press(int key, t_cub3d *cub3d);
 int     close_window(t_cub3d *cub3d);
-void	render_map_2d(t_cub3d *cub3d);
-void	render_player(t_cub3d *cub3d);
+void	render(t_cub3d *cub3d);
+void	render_scene(t_cub3d *cub3d);
 void    put_player(t_cub3d *cub3d, float *tmp);
 void	cast_mid_ray(t_cub3d *cub3d);
 int     check_hit_wall(t_cub3d *cub3d, float pixel_y, float pixel_x, int size);
@@ -47,4 +47,6 @@ float   intersect_dist(t_cub3d *cub3d);
 int     mouse_move(int x, int y, t_cub3d *cub3d);
 void    img_transparent(t_cub3d *cub3d, t_img *img);
 float   normligize_angle(float angle);
+void	erase_minimap(t_cub3d *cub3d);
+void    show_2d_map(t_cub3d *cub3d);
 #endif
