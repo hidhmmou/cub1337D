@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 00:04:28 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 01:32:15 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ void draw_wall(t_cub3d *cub3d)
 	int 	i;
 
 	i = -1;
-	cub3d->draw->color = 0x4CFFFF00;
 	while (++i < cub3d->draw->draw_start)
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, rgb_to_int(*cub3d->map->ciel_color));
-	//my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, 0);
-	while (++i <= cub3d->draw->draw_end)
-		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, cub3d->draw->color);
-	//my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, 0);
+	while (i <= cub3d->draw->draw_end)
+		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, cub3d->draw->color);
 	while (++i < HEIGHT)
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, rgb_to_int(*cub3d->map->floor_color));
 	cub3d->draw->x++;
@@ -75,10 +72,15 @@ void calc(t_cub3d *cub3d)
         cub3d->draw->draw_end = HEIGHT - 1;
 }
 
-void	cast_ray(t_cub3d *cub3d)
+void	cast_ray(t_cub3d *cub3d, int is_mid)
 {
+	if (is_mid)
+		cub3d->draw->ray_angle = cub3d->map->player.angle;
 	init_draw(cub3d);
 	calc(cub3d);
+	check_direction(cub3d);
+	if (is_mid)
+		cub3d->draw->color = 0;
 	draw_wall(cub3d);
 }
 
@@ -130,7 +132,12 @@ void	render_player(t_cub3d *cub3d)
 	cub3d->draw->x = 0;
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
 	while (++i <= WIDTH)
-		cast_ray(cub3d);
+	{
+		if (i != WIDTH / 2)
+			cast_ray(cub3d, 0);
+		else
+			cast_ray(cub3d, 1);
+	}
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img->img, 0, 0);
 	if (cub3d->weapon == 1)
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img_weapon->img, WIDTH / 2 - WEAPON_W / 2, HEIGHT - WEAPON_H);

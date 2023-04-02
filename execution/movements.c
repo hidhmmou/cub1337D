@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:16:13 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/02 00:05:43 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 01:05:51 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_movement(t_cub3d *cub3d, int to_add)
 {
-	//cub3d->draw->radiant = normligize_angle(to_radian(cub3d->map->player.angle + to_add));
 	cub3d->draw->radiant = to_radian(cub3d->map->player.angle + to_add);
 	cub3d->draw->dx = SIZE * cos(cub3d->draw->radiant);
 	cub3d->draw->dy = SIZE * sin(cub3d->draw->radiant);

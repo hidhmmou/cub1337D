@@ -132,6 +132,7 @@ float intersect_dist(t_cub3d *cub3d)
 
     if (vertHitDistance < horzHitDistance)
     {
+        cub3d->map->player.direction = VERTICAL;
         cub3d->draw->wallHitX = vertWallHitX;
         cub3d->draw->wallHitY = vertWallHitY;
         cub3d->draw->wallHitContent = vertWallContent;
@@ -139,6 +140,7 @@ float intersect_dist(t_cub3d *cub3d)
     }
     else
     {
+        cub3d->map->player.direction = HORIZONTAL;
         cub3d->draw->wallHitX = horzWallHitX;
         cub3d->draw->wallHitY = horzWallHitY;
         cub3d->draw->wallHitContent = horzWallContent;

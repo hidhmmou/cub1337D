@@ -6,14 +6,14 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 21:40:49 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 01:32:57 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
 
 
-void	get_wall_color(t_cub3d *cub3d, float y, float x)
+void	get_wall_color(t_cub3d *cub3d)
 {
 	if (cub3d->map->player.direction == NO)
 		cub3d->draw->color = 23212;
@@ -25,17 +25,17 @@ void	get_wall_color(t_cub3d *cub3d, float y, float x)
 		cub3d->draw->color = 34614;
 }
 
-void check_direction(t_cub3d *cub3d, float y, float x, float *tmp)
+void check_direction(t_cub3d *cub3d)
 {
-	if (cub3d->map->player.direction == VERTICAL && x - tmp[0] > 0)
+	if (cub3d->map->player.direction == VERTICAL && cub3d->draw->wallHitX - cub3d->map->player.x > 0)
 		cub3d->map->player.direction = EA;
-	if (cub3d->map->player.direction == VERTICAL && x - tmp[0] < 0)
+	if (cub3d->map->player.direction == VERTICAL && cub3d->draw->wallHitX - cub3d->map->player.x < 0)
 		cub3d->map->player.direction = WE;
-	if (cub3d->map->player.direction == HORIZONTAL && y - tmp[1] < 0)
+	if (cub3d->map->player.direction == HORIZONTAL && cub3d->draw->wallHitY - cub3d->map->player.y < 0)
 		cub3d->map->player.direction = NO;
-	if (cub3d->map->player.direction == HORIZONTAL && y - tmp[1] > 0)
+	if (cub3d->map->player.direction == HORIZONTAL && cub3d->draw->wallHitY - cub3d->map->player.y > 0)
 		cub3d->map->player.direction = SO;
-	get_wall_color(cub3d, y, x);
+	get_wall_color(cub3d);
 }
 
 void put_player(t_cub3d *cub3d, float *tmp)
@@ -51,49 +51,9 @@ void put_player(t_cub3d *cub3d, float *tmp)
 	my_mlx_pixel_put(cub3d->img_2d, tmp[0] + 2, tmp[1], 0x00FF00);
 }
 
-void	cast_mid_ray(t_cub3d *cub3d)
-{
-	float	pixel_x;
-	float	pixel_y;
-	float	tmp[2];
-
-	pixel_x = cub3d->map->player.x;
-	pixel_y = cub3d->map->player.y;
-	tmp[0] = pixel_x;
-	tmp[1] = pixel_y;
-	cub3d->draw->ray_angle = cub3d->map->player.angle;
-	init_draw(cub3d);
-	while (1)
-	{
-		pixel_x += cub3d->draw->increment_x;
-		if (check_hit_wall(cub3d, pixel_y, pixel_x, SIZE))
-		{
-			cub3d->map->player.direction = VERTICAL;
-			check_direction(cub3d, pixel_y, pixel_x, tmp);
-			break ;
-		}
-		pixel_y += cub3d->draw->increment_y;
-		if (check_hit_wall(cub3d, pixel_y, pixel_x, SIZE))
-		{
-			cub3d->map->player.direction = HORIZONTAL;
-			check_direction(cub3d, pixel_y, pixel_x, tmp);
-			break ;
-		}
-	}
-	cub3d->draw->distance = (float)sqrt(pow(pixel_x - tmp[0], 2) + pow(pixel_y - tmp[1], 2));
-    cub3d->draw->wall_height = (float)HEIGHT / cub3d->draw->distance;
-	cub3d->draw->wall_height = (float)pow(cub3d->draw->wall_height, -1) * 7000;
-    cub3d->draw->draw_start = (float)(-cub3d->draw->wall_height / 2.0 + HEIGHT / 2.0);
-    cub3d->draw->draw_end = (float)(cub3d->draw->wall_height / 2.0 + HEIGHT / 2.0);
-    if (cub3d->draw->draw_start < 0)
-        cub3d->draw->draw_start = 0;
-    if (cub3d->draw->draw_end >= HEIGHT)
-        cub3d->draw->draw_end = HEIGHT - 1;
-	cub3d->draw->x--;
-}
-
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
+	//mlx_xpm_to_image()
 	char	*dst;
 
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)

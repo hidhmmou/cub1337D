@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 22:07:52 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 01:22:25 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define FOV 60
-# define SIZE 32
+# define SIZE 64
 # define SIZE_2D 10
 # define SIZE_BIG_2D 20
 # define ANGLE_SIZE FOV / WIDTH
 # define ROTATE_ANGLE 5
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define P 3.14159265
-# define SPEED 8
+# define SPEED 16
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
 # define MIDDLE_CLICK 3
@@ -220,9 +220,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		rotate(int key, t_cub3d *cub3d);
 float	to_radian(float angle);
 void	press_start(int button, int x, int y, t_cub3d *cub3d);
-void	get_wall_color(t_cub3d *cub3d, float y, float x);
+void	get_wall_color(t_cub3d *cub3d);
 int		release(int key, t_cub3d *cub3d);
 int		loop(t_cub3d *cub3d);
 int		mouse_move(int x, int y, t_cub3d *cub3d);
-float to_radian(float angle);
+float 	to_radian(float angle);
 #endif

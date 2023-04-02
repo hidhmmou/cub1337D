@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:34:44 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 18:34:53 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:39:34 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int mouse_move(int x, int y, t_cub3d *cub3d)
 		return (1);
 	if (cub3d->mouse->x != x)
 	{
-		cub3d->map->player.angle -= (x - cub3d->mouse->x) * 0.1;
+		cub3d->map->player.angle += (x - cub3d->mouse->x) * 0.1;
 		cub3d->mouse->x = x;
 		if (cub3d->mouse->x >= WIDTH || cub3d->mouse->x <= 0)
 		{
