@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 01:32:57 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:34:48 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void put_player(t_cub3d *cub3d, float *tmp)
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	//mlx_xpm_to_image()
 	char	*dst;
 
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
