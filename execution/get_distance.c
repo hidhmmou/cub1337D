@@ -23,7 +23,7 @@ int has_wall_at(t_cub3d *cub3d, float x, float y)
 
     if (gridIndexX < 0 || gridIndexX > cub3d->map->max_len - 1 || gridIndexY < 0 || gridIndexY > cub3d->map->len - 1)
         return (0);
-    return (in_set(cub3d->map->map[gridIndexY][gridIndexX], "1D"));
+    return (in_set(cub3d->map->square_map[gridIndexY][gridIndexX], "1D"));
 }
 
 float intersect_dist(t_cub3d *cub3d)
@@ -31,7 +31,6 @@ float intersect_dist(t_cub3d *cub3d)
     float angle;
 
     angle = normligize_angle(cub3d->draw->radiant + M_PI);
-    //angle = cub3d->draw->radiant;
     int isRayFacingDown = angle > 0 && angle < M_PI;
     int isRayFacingUp = !isRayFacingDown;
     int isRayFacingRight = angle < 0.5 * M_PI || angle > 1.5 * M_PI;
@@ -73,7 +72,7 @@ float intersect_dist(t_cub3d *cub3d)
         {
             horzWallHitX = nextHorzTouchX;
             horzWallHitY = nextHorzTouchY;
-            horzWallContent = cub3d->map->map[(int)floor(yToCheck / SIZE)][(int)floor(xToCheck / SIZE)];
+            horzWallContent = cub3d->map->square_map[(int)floor(yToCheck / SIZE)][(int)floor(xToCheck / SIZE)];
             foundHorzWallHit = 1;
             break ;
         }
@@ -116,7 +115,7 @@ float intersect_dist(t_cub3d *cub3d)
         {
             vertWallHitX = nextVertTouchX;
             vertWallHitY = nextVertTouchY;
-            vertWallContent = cub3d->map->map[(int)floor(yToCheck / SIZE)][(int)floor(xToCheck / SIZE)];
+            vertWallContent = cub3d->map->square_map[(int)floor(yToCheck / SIZE)][(int)floor(xToCheck / SIZE)];
             foundVertWallHit = 1;
             break ;
         }

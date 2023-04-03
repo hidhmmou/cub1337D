@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:42:34 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 00:47:25 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:47:03 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ int get_color(char c)
 {
 	if (c == 'K' || c == ' ')
 		return (0xFF4392F1);
-	if (c == 'D')
-		return (0xFF0000FF);
-	if (c == '1')
+	if (c == '1' || c == 'D')
 		return (0x002C54);
-	if (c == '0' || in_set(c, "NSWE"))
+	if (c == '0' || in_set(c, "NSWEX"))
 		return (0x4CFF5733);
 	if (c == '\n')
 		return (0xFF00FF00);

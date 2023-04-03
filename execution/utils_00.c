@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 01:16:05 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:23:32 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void	cast_mid_ray(t_cub3d *cub3d)
 		else if (is_wall(*cub3d->middle_ray_block))
 		{
 			printf("%sWall detected%s\n", RED, RESET);
-			cub3d->facing_close_door = 0;
 			break ;
 		}
 	}
