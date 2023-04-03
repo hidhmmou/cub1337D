@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 02:45:22 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:06:13 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 int is_wall(char c)
 {
-	return (c == '1');
+	return (c == '1' || c == 'D');
+}
+
+int is_door(char c)
+{
+	if (c == 'D')
+		return (1);
+	if (c == 'X')
+		return (2);
+	return (0);
 }
 
 int	check_hit_wall(t_cub3d *cub3d, float pixel_y, float pixel_x, int size)
@@ -72,15 +81,16 @@ void calc(t_cub3d *cub3d)
         cub3d->draw->draw_end = HEIGHT - 1;
 }
 
-void	cast_ray(t_cub3d *cub3d, int is_mid)
+void	cast_ray(t_cub3d *cub3d)
 {
-	if (is_mid)
-		cub3d->draw->ray_angle = cub3d->map->player.angle;
 	init_draw(cub3d);
 	calc(cub3d);
 	check_direction(cub3d);
-	if (is_mid)
+	if (cub3d->draw->ray_angle == cub3d->map->player.angle)
+	{
+		cast_mid_ray(cub3d);
 		cub3d->draw->color = 0;
+	}
 	draw_wall(cub3d);
 }
 
@@ -92,12 +102,7 @@ void	render_scene(t_cub3d *cub3d)
 	cub3d->draw->x = 0;
 	cub3d->draw->ray_angle = cub3d->map->player.angle - 30;
 	while (++i <= WIDTH)
-	{
-		if (i != WIDTH / 2)
-			cast_ray(cub3d, 0);
-		else
-			cast_ray(cub3d, 1);
-	}
+		cast_ray(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img->img, 0, 0);
 	if (cub3d->weapon == 1)
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img_weapon->img, WIDTH / 2 - WEAPON_W / 2, HEIGHT - WEAPON_H);

@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 02:34:48 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:16:05 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 void	get_wall_color(t_cub3d *cub3d)
 {
-	if (cub3d->map->player.direction == NO)
+	if (cub3d->draw->wallHitContent == 'D')
+		cub3d->draw->color = 0xFF5733;
+	else if (cub3d->map->player.direction == NO)
 		cub3d->draw->color = 23212;
-	if (cub3d->map->player.direction == SO)
+	else if (cub3d->map->player.direction == SO)
 		cub3d->draw->color = 54321;
-	if (cub3d->map->player.direction == EA)
+	else if (cub3d->map->player.direction == EA)
 		cub3d->draw->color = 3214;
-	if (cub3d->map->player.direction == WE)
+	else if (cub3d->map->player.direction == WE)
 		cub3d->draw->color = 34614;
 }
 
@@ -96,5 +98,42 @@ void img_transparent(t_cub3d *cub3d, t_img *img)
 		while (++j < WIDTH)
 			my_mlx_pixel_put(img, j, i, 0xFFFFFFFF);
 		i++;
+	}
+}
+void	cast_mid_ray(t_cub3d *cub3d)
+{
+	float	pixel_x;
+	float	pixel_y;
+
+	pixel_x = cub3d->map->player.x;
+	pixel_y = cub3d->map->player.y;
+	cub3d->draw->ray_angle = cub3d->map->player.angle;
+	cub3d->facing_open_door = 0;
+	cub3d->facing_close_door = 0;
+	init_draw(cub3d);
+	int i = 0;
+	while (i++ < 700)
+	{
+		pixel_x -= cub3d->draw->increment_x;
+		pixel_y -= cub3d->draw->increment_y;
+		cub3d->middle_ray_block = &cub3d->map->square_map[(int)pixel_y / SIZE][(int)pixel_x / SIZE];
+		if (is_door(*cub3d->middle_ray_block) == 1)
+		{
+			printf("%sCLose Door detected%s\n", GREEN, RESET);
+			cub3d->facing_close_door = 1;
+			break ;
+		}
+		else if (is_door(*cub3d->middle_ray_block) == 2)
+		{
+			printf("%sOpen Door detected%s\n", GREEN, RESET);
+			cub3d->facing_open_door = 1;
+			break ;
+		}
+		else if (is_wall(*cub3d->middle_ray_block))
+		{
+			printf("%sWall detected%s\n", RED, RESET);
+			cub3d->facing_close_door = 0;
+			break ;
+		}
 	}
 }

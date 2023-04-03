@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:26:22 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 02:37:44 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:12:43 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	weapon(t_cub3d *cub3d)
 
 int	press(int key, t_cub3d *cub3d)
 {
-	//printf("button = %d\n", key);
+	printf("button = %d\n", key);
 	if (key == ESC)
 		close_window(cub3d);
 	if (key == SPACE)
@@ -113,6 +113,14 @@ int	press(int key, t_cub3d *cub3d)
 		cub3d->keys[S] = 1;
 	else if (key == UP_MOVE)
 		cub3d->keys[W] = 1;
+	else if (key == OPEN_DOOR && (cub3d->facing_close_door || cub3d->facing_open_door))
+	{
+		if (cub3d->facing_close_door)
+			cub3d->middle_ray_block[0] = 'X';
+		else if (cub3d->facing_open_door)
+			cub3d->middle_ray_block[0] = 'D';
+		render(cub3d);
+	}
 	else if (key == TAB)
 	{
 		img_transparent(cub3d, cub3d->img_2d);

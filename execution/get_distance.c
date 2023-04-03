@@ -23,7 +23,7 @@ int has_wall_at(t_cub3d *cub3d, float x, float y)
 
     if (gridIndexX < 0 || gridIndexX > cub3d->map->max_len - 1 || gridIndexY < 0 || gridIndexY > cub3d->map->len - 1)
         return (0);
-    return (cub3d->map->map[gridIndexY][gridIndexX] == '1');
+    return (in_set(cub3d->map->map[gridIndexY][gridIndexX], "1D"));
 }
 
 float intersect_dist(t_cub3d *cub3d)

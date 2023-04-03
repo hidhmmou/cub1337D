@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/02 02:47:41 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:05:17 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define CTRL 256
 # define SHIFT 257
 # define ESC 53
+# define OPEN_DOOR 14
 # define CLOSE 17
 # define HORIZONTAL 1
 # define VERTICAL 2
@@ -163,6 +164,7 @@ typedef struct s_cub3d
 {
 	t_img		*img_2d;
 	t_img		*img;
+	t_img		textures[4];
 	t_img		*img_weapon;
 	t_map		*map;
 	t_draw		*draw;
@@ -177,6 +179,9 @@ typedef struct s_cub3d
 	int 		shoot;
 	int 		change;
 	int 		weapon;
+	char		*middle_ray_block;
+	int 		facing_close_door;
+	int 		facing_open_door;
 }	t_cub3d;
 
 
@@ -225,4 +230,5 @@ int		release(int key, t_cub3d *cub3d);
 int		loop(t_cub3d *cub3d);
 int		mouse_move(int x, int y, t_cub3d *cub3d);
 float 	to_radian(float angle);
+int is_door(char c);
 #endif
