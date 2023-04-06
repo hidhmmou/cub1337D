@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/06 00:49:02 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:16:46 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define FOV 60
-# define SIZE 64
+# define SIZE 1024
 # define SIZE_2D 10
 # define SIZE_BIG_2D 20
 # define ANGLE_SIZE FOV / WIDTH
 # define ROTATE_ANGLE 5
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define P 3.14159265
-# define SPEED 32
+# define SPEED 600
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
 # define MIDDLE_CLICK 3
