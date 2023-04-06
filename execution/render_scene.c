@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 01:27:02 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:53:45 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,77 @@ void	init_draw(t_cub3d *cub3d)
 	cub3d->draw->ray_angle += 60.0 / WIDTH;
 }
 
+static void draw_initializer(t_cub3d *cub3d)
+{
+	cub3d->draw->size = cub3d->draw->wall_height / SIZE;
+	cub3d->draw->texture_pos = 0;
+	cub3d->draw->texture_step = 0;
+	if (cub3d->draw->draw_end == HEIGHT - 1)
+		cub3d->draw->texture_pos = (cub3d->draw->wall_height - HEIGHT) / 2;
+}
+
+int	get_pexel_from_img(t_img *img, int x, int y)
+{
+	char	*dst;
+
+	if (x >= img->width || x < 0 || y >= img->height || y < 0)
+		return (-1);
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
+
+static int get_color(t_cub3d *cub3d, int i, int my, float size)
+{
+	int	x;
+	int	y;
+
+	if (!(int)cub3d->map->player.direction % 2)
+	{
+		x = (int)cub3d->draw->wallHitY % SIZE;
+		y = (i + my) / size;
+		//if (cub3d->draw.type == 'D')
+		//	return (get_pexel_from_img(&cub3d->imgs.door, x, y));
+		//if (cub3d->map->player.x - cub3d->draw->wallHitX > 0)
+		//	return (get_pexel_from_img(&cub3d->textures[NO] , x, y));
+		return (get_pexel_from_img(cub3d->no_texture, x, y));
+	}
+	else
+	{
+		x = (int)cub3d->draw->wallHitX % SIZE;
+		y = (i + my) / size;
+		//if (cub3d->draw.type == 'D')
+		//	return (get_pexel_from_img(&cub3d->imgs.door, x, y));
+		//if (cub3d->map->player.y - cub3d->draw->wallHitY > 0)
+		//	return (get_pexel_from_img(&cub3d->textures[NO], x, y));
+		return (get_pexel_from_img(cub3d->no_texture, x, y));
+	}
+	return (0);
+}
+
 void draw_wall(t_cub3d *cub3d)
 {
 	int 	i;
+	float	size;
+	int		m;
+	int		n;
+	int		my;
 
 	i = -1;
+	size = cub3d->draw->wall_height / SIZE;
+	m = 0;
+	n = 0;
+	my = 0;
+	if (cub3d->draw->draw_end == HEIGHT - 1)
+		my = (cub3d->draw->wall_height - HEIGHT) / 2;
+	//draw_initializer(cub3d);
 	while (++i < cub3d->draw->draw_start)
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, rgb_to_int(*cub3d->map->ciel_color));
 	while (i < cub3d->draw->draw_end)
+	{
+		cub3d->draw->color = get_color(cub3d, n, my, size);
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, cub3d->draw->color);
+		n++;
+	}
 	while (i < HEIGHT)
 		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, rgb_to_int(*cub3d->map->floor_color));
 	cub3d->draw->x++;

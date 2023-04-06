@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:16:13 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/02 01:05:51 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/03 03:57:49 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int		move_up(t_cub3d *cub3d)
 	int		moves_nbr;
 	float	pixel_x;
 	float	pixel_y;
-
 
 	init_movement(cub3d, 0);
 	moves_nbr = 0;
@@ -78,7 +77,7 @@ int	move_right(t_cub3d *cub3d)
 	int		moves_nbr;
 	float	pixel_x;
 	float	pixel_y;
-
+	int		pid;
 
 	init_movement(cub3d, -90);
 	moves_nbr = 0;

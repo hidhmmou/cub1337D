@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:34:46 by ramhouch          #+#    #+#             */
-/*   Updated: 2023/04/02 02:45:49 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:43:23 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void    img_transparent(t_cub3d *cub3d, t_img *img);
 float   normligize_angle(float angle);
 void	erase_minimap(t_cub3d *cub3d);
 void    show_2d_map(t_cub3d *cub3d);
+void    init_textures(t_cub3d *cub3d);
 #endif

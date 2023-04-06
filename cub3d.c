@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:05:32 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/01 23:58:34 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:44:03 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	executing(t_cub3d *cub3d)
 	cub3d->img_weapon->img = mlx_new_image(cub3d->mlx, WIDTH, HEIGHT);
 	cub3d->img_weapon->addr = mlx_get_data_addr(cub3d->img_weapon->img, &cub3d->img_weapon->bits_per_pixel, &cub3d->img_weapon->line_length, &cub3d->img_weapon->endian);
 	img_transparent(cub3d, cub3d->img_weapon);
+	init_textures(cub3d);
 }
 
 int	main(int ac, char *av[])

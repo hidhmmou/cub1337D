@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 01:23:32 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 02:49:02 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,15 @@ void	cast_mid_ray(t_cub3d *cub3d)
 		cub3d->middle_ray_block = &cub3d->map->square_map[(int)pixel_y / SIZE][(int)pixel_x / SIZE];
 		if (is_door(*cub3d->middle_ray_block) == 1)
 		{
-			printf("%sCLose Door detected%s\n", GREEN, RESET);
 			cub3d->facing_close_door = 1;
 			break ;
 		}
 		else if (is_door(*cub3d->middle_ray_block) == 2)
 		{
-			printf("%sOpen Door detected%s\n", GREEN, RESET);
 			cub3d->facing_open_door = 1;
 			break ;
 		}
 		else if (is_wall(*cub3d->middle_ray_block))
-		{
-			printf("%sWall detected%s\n", RED, RESET);
 			break ;
-		}
 	}
 }

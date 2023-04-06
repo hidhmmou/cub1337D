@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 01:05:17 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:48:12 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -90,6 +91,10 @@ typedef struct s_draw
 	float	wallHitX;
 	float	wallHitY;
 	int		wallHitContent;
+	int		size;
+	int		offset;
+	int 	texture_step;
+	int 	texture_pos;
 }	t_draw;
 
 typedef struct s_player
@@ -160,15 +165,26 @@ typedef struct t_mouse
 	int		shown;
 }	t_mouse;
 
+typedef struct s_sound
+{
+	int		pid;
+	int		music_background;
+	int		steps_sound;
+	int		shoot;
+	int		playing_sound;
+}	t_sound;
+
 typedef struct s_cub3d
 {
 	t_img		*img_2d;
 	t_img		*img;
 	t_img		textures[4];
+	t_img		*no_texture;
 	t_img		*img_weapon;
 	t_map		*map;
 	t_draw		*draw;
 	t_mouse		*mouse;
+	t_sound		*sound;
 	int			keys[10];
 	void		*mlx;
 	void		*win;
@@ -182,6 +198,8 @@ typedef struct s_cub3d
 	char		*middle_ray_block;
 	int 		facing_close_door;
 	int 		facing_open_door;
+	int 		pid;
+	
 }	t_cub3d;
 
 

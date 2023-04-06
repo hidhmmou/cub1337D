@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:26:22 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/03 01:30:44 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/05 20:59:14 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	close_window(t_cub3d *cub3d)
 {
 	printf("%sWindow Closed\n%s", RED, RESET);
+	if (cub3d->sound->steps_sound)
+		system("killall afplay");
 	mlx_destroy_window(cub3d->mlx, cub3d->win);
 	ft_free(cub3d);
 	return (0);
@@ -45,8 +47,25 @@ int release(int key, t_cub3d *cub3d)
 	return (1);
 }
 
+void steps_sounds(t_cub3d *cub3d)
+{
+	if (cub3d->keys[D] || cub3d->keys[A]
+		|| cub3d->keys[W] || cub3d->keys[S])
+	{
+		if (!cub3d->sound->steps_sound++)
+			system("afplay sounds/steps.mp3 &");
+	}
+	else if (cub3d->sound->steps_sound)
+	{
+		cub3d->sound->steps_sound = 0;
+		system("killall afplay");
+	}
+}
+
 int	loop(t_cub3d *cub3d)
 {
+	if (cub3d->start)
+		steps_sounds(cub3d);
 	if (cub3d->keys[LEFT] && ++cub3d->change)
 		cub3d->map->player.angle -= ROTATE_ANGLE;
 	if (cub3d->keys[RIGHT] && ++cub3d->change)
@@ -101,6 +120,7 @@ int	press(int key, t_cub3d *cub3d)
 	}
 	if (!cub3d->start)
 		return (1);
+	//system("afplay sounds/wow.mp3 &");
 	if (key == LEFT_ROW)
 		cub3d->keys[LEFT] = 1;
 	else if (key == RIGHT_ROW)
@@ -117,13 +137,13 @@ int	press(int key, t_cub3d *cub3d)
 	{
 		if (cub3d->facing_close_door)
 		{
+			system("afplay sounds/door_open.mp3 &");
 			cub3d->middle_ray_block[0] = 'X';
-			printf("%sDoor Opened\n%s", RED, RESET);
 		}
 		else if (cub3d->facing_open_door)
 		{
+			system("afplay sounds/door_open.mp3 &");
 			cub3d->middle_ray_block[0] = 'D';
-			printf("%sDoor Closed\n%s", GREEN, RESET);
 		}
 		render(cub3d);
 	}
@@ -184,7 +204,10 @@ void shoot(int button, int x, int y, t_cub3d *cub3d)
 {
 	pthread_t	thread;
 	if (button == LEFT_CLICK && cub3d->weapon == 1 && cub3d->mouse->shown == -1)
+	{
+		system("afplay sounds/shot.mp3 &");
 		pthread_create(&thread, NULL, animate, cub3d);
+	}
 }
 
 int mouse_press(int button, int x, int y, t_cub3d *cub3d)
