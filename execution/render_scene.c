@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/06 00:50:33 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 03:42:25 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static int get_color(t_cub3d *cub3d, int i, int my, float size)
 		y = (i + my) / size;
 		if (cub3d->draw->wallHitContent == 'D')
 			return (get_pexel_from_img(&cub3d->textures[DOOR], x, y));
+		if (cub3d->draw->wallHitContent == 'X')
+			return (get_pexel_from_img(&cub3d->textures[O_DOOR], x, y));
 		if (cub3d->map->player.direction == WE)
 			return (get_pexel_from_img(&cub3d->textures[WE] , x, y));
 		return (get_pexel_from_img(&cub3d->textures[EA], x, y));
@@ -93,6 +95,8 @@ static int get_color(t_cub3d *cub3d, int i, int my, float size)
 		y = (i + my) / size;
 		if (cub3d->draw->wallHitContent == 'D')
 			return (get_pexel_from_img(&cub3d->textures[DOOR], x, y));
+		if (cub3d->draw->wallHitContent == 'X')
+			return (get_pexel_from_img(&cub3d->textures[O_DOOR], x, y));
 		if (cub3d->map->player.direction == NO)
 			return (get_pexel_from_img(&cub3d->textures[NO], x, y));
 		return (get_pexel_from_img(&cub3d->textures[SO], x, y));
@@ -117,15 +121,16 @@ void draw_wall(t_cub3d *cub3d)
 		my = (cub3d->draw->wall_height - HEIGHT) / 2;
 	//draw_initializer(cub3d);
 	while (++i < cub3d->draw->draw_start)
-		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, rgb_to_int(*cub3d->map->ciel_color));
+		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, shader(rgb_to_int(*cub3d->map->ciel_color), ((HEIGHT / 2.0) - i) * 100.0 / (HEIGHT / 2.0)));
 	while (i < cub3d->draw->draw_end)
 	{
 		cub3d->draw->color = get_color(cub3d, n, my, size);
-		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, cub3d->draw->color);
+		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, shader(cub3d->draw->color, cub3d->draw->wall_height * 100 / HEIGHT));
 		n++;
 	}
-	while (i < HEIGHT)
-		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i++, rgb_to_int(*cub3d->map->floor_color));
+	i--;
+	while (++i < HEIGHT)
+		my_mlx_pixel_put(cub3d->img, cub3d->draw->x, i, shader(rgb_to_int(*cub3d->map->floor_color), ((HEIGHT / 2.0) + i - HEIGHT) * 100.0 / (HEIGHT / 2.0)));
 	cub3d->draw->x++;
 }
 

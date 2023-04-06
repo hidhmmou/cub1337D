@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/06 01:16:46 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 03:54:13 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define FOV 60
-# define SIZE 1024
+# define SIZE 64
 # define SIZE_2D 10
 # define SIZE_BIG_2D 20
 # define ANGLE_SIZE FOV / WIDTH
 # define ROTATE_ANGLE 5
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define P 3.14159265
-# define SPEED 600
+# define SPEED 32
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
 # define MIDDLE_CLICK 3
@@ -97,12 +97,24 @@ typedef struct s_draw
 	int 	texture_pos;
 }	t_draw;
 
+typedef struct s_img
+{
+	void		*img;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	char		*addr;
+	int			width;
+	int			height;
+}	t_img;
+
 typedef struct s_player
 {
 	int			x;
 	int			y;
 	float 		angle;
 	float		direction;
+	t_img		*img;
 }	t_player;
 typedef struct s_map
 {
@@ -127,16 +139,8 @@ typedef struct s_map
 	int			minimap_size;
 }		t_map;
 
-typedef struct s_img
-{
-	void		*img;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	char		*addr;
-	int			width;
-	int			height;
-}	t_img;
+
+
 
 enum e_texture
 {
@@ -144,7 +148,8 @@ enum e_texture
 	SO,
 	WE,
 	EA,
-	DOOR
+	DOOR,
+	O_DOOR
 };
 
 enum e_key
@@ -179,7 +184,8 @@ typedef struct s_cub3d
 {
 	t_img		*img_2d;
 	t_img		*img;
-	t_img		textures[5];
+	t_img		*torch;
+	t_img		textures[6];
 	t_img		*no_texture;
 	t_img		*img_weapon;
 	t_map		*map;
@@ -224,6 +230,7 @@ void	check_player(t_cub3d *cub3d);
 int		in_set(char c, char *set);
 int		check_surrounded(t_cub3d *cub3d);
 int		check_outsider_floor(t_cub3d *cub3d);
+void *animate_torch(void *param);
 int		rgb_to_int(t_color color);
 int		check_floor_outside_1(char **map);
 int		check_floor_outside_2(char **map);

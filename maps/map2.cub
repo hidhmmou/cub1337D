@@ -1,5 +1,5 @@
-F       139,6,19
-C       0,255,255
+F       13,0,39
+C       27,28,39
 WE      textures/NO.xpm
 SO      textures/WE.xpm
 NO      textures/SO.xpm

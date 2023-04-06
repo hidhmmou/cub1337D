@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 03:53:42 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/06 00:40:21 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 03:16:28 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void init_textures(t_cub3d *cub3d)
     cub3d->textures[WE].img = mlx_xpm_file_to_image(cub3d->mlx, cub3d->map->we_texture, &cub3d->textures[WE].width, &cub3d->textures[WE].height);
     cub3d->textures[EA].img = mlx_xpm_file_to_image(cub3d->mlx, cub3d->map->ea_texture, &cub3d->textures[EA].width, &cub3d->textures[EA].height);
 	cub3d->textures[DOOR].img = mlx_xpm_file_to_image(cub3d->mlx, "textures/door.xpm", &cub3d->textures[DOOR].width, &cub3d->textures[DOOR].height);
-	if (!cub3d->textures[NO].img || !cub3d->textures[SO].img || !cub3d->textures[WE].img || !cub3d->textures[EA].img || !cub3d->textures[DOOR].img)
+	cub3d->textures[O_DOOR].img = mlx_xpm_file_to_image(cub3d->mlx, "textures/door_opened.xpm", &cub3d->textures[O_DOOR].width, &cub3d->textures[O_DOOR].height);
+	if (!cub3d->textures[NO].img || !cub3d->textures[SO].img || !cub3d->textures[WE].img || !cub3d->textures[EA].img || !cub3d->textures[DOOR].img || !cub3d->textures[O_DOOR].img)
 		ft_error("Error\ntexture not found", NULL);
     cub3d->textures[SO].addr = mlx_get_data_addr(cub3d->textures[SO].img, &cub3d->textures[SO].bits_per_pixel, &cub3d->textures[SO].line_length, &cub3d->textures[SO].endian);
     cub3d->textures[WE].addr = mlx_get_data_addr(cub3d->textures[WE].img, &cub3d->textures[WE].bits_per_pixel, &cub3d->textures[WE].line_length, &cub3d->textures[WE].endian);
     cub3d->textures[EA].addr = mlx_get_data_addr(cub3d->textures[EA].img, &cub3d->textures[EA].bits_per_pixel, &cub3d->textures[EA].line_length, &cub3d->textures[EA].endian);
     cub3d->textures[NO].addr = mlx_get_data_addr(cub3d->textures[NO].img, &cub3d->textures[NO].bits_per_pixel, &cub3d->textures[NO].line_length, &cub3d->textures[NO].endian);
 	cub3d->textures[DOOR].addr = mlx_get_data_addr(cub3d->textures[DOOR].img, &cub3d->textures[DOOR].bits_per_pixel, &cub3d->textures[DOOR].line_length, &cub3d->textures[DOOR].endian);
+	cub3d->textures[O_DOOR].addr = mlx_get_data_addr(cub3d->textures[O_DOOR].img, &cub3d->textures[O_DOOR].bits_per_pixel, &cub3d->textures[O_DOOR].line_length, &cub3d->textures[O_DOOR].endian);
 }
 
 int	get_y(t_cub3d *cub3d, int i, int y)

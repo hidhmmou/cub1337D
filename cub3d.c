@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:05:32 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/05 22:44:03 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 03:54:35 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void	executing(t_cub3d *cub3d)
 int	main(int ac, char *av[])
 {
 	t_cub3d	*cub3d;
+	pthread_t	thread;
 
 	parsing(&cub3d, av, ac);
 	executing(cub3d);
 	put_xpm_file_to_window(cub3d, "textures/intro.xpm", 0, 0);
+	pthread_create(&thread, NULL, animate_torch, cub3d);
 	mlx_hook(cub3d->win, 2, 0, &press, cub3d);
 	mlx_hook(cub3d->win, 3, 0, &release, cub3d);
 	mlx_hook(cub3d->win, 6, 0, &mouse_move, cub3d);

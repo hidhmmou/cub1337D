@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/06 00:48:30 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:41:05 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	cast_mid_ray(t_cub3d *cub3d)
 	cub3d->facing_close_door = 0;
 	init_draw(cub3d);
 	int i = 0;
-	while (i++ < 700)
+	while (i++ < SIZE * 5)
 	{
 		pixel_x -= cub3d->draw->increment_x;
 		pixel_y -= cub3d->draw->increment_y;

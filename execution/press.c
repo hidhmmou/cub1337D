@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:26:22 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/05 20:59:14 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:33:04 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,12 @@ int	press(int key, t_cub3d *cub3d)
 	{
 		if (cub3d->facing_close_door)
 		{
-			system("afplay sounds/door_open.mp3 &");
+			//system("afplay sounds/door_open.mp3 &");
 			cub3d->middle_ray_block[0] = 'X';
 		}
 		else if (cub3d->facing_open_door)
 		{
-			system("afplay sounds/door_open.mp3 &");
+			//system("afplay sounds/door_open.mp3 &");
 			cub3d->middle_ray_block[0] = 'D';
 		}
 		render(cub3d);
