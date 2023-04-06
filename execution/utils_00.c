@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:42:58 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/05 02:49:02 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:48:30 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	get_wall_color(t_cub3d *cub3d)
 
 void check_direction(t_cub3d *cub3d)
 {
+	cub3d->ray_hit_direction = cub3d->map->player.direction;
 	if (cub3d->map->player.direction == VERTICAL && cub3d->draw->wallHitX - cub3d->map->player.x > 0)
 		cub3d->map->player.direction = EA;
 	if (cub3d->map->player.direction == VERTICAL && cub3d->draw->wallHitX - cub3d->map->player.x < 0)

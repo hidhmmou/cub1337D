@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:36:04 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/05 22:53:45 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:50:33 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,25 @@ static int get_color(t_cub3d *cub3d, int i, int my, float size)
 	int	x;
 	int	y;
 
-	if (!(int)cub3d->map->player.direction % 2)
+	if (cub3d->ray_hit_direction)
 	{
 		x = (int)cub3d->draw->wallHitY % SIZE;
 		y = (i + my) / size;
-		//if (cub3d->draw.type == 'D')
-		//	return (get_pexel_from_img(&cub3d->imgs.door, x, y));
-		//if (cub3d->map->player.x - cub3d->draw->wallHitX > 0)
-		//	return (get_pexel_from_img(&cub3d->textures[NO] , x, y));
-		return (get_pexel_from_img(cub3d->no_texture, x, y));
+		if (cub3d->draw->wallHitContent == 'D')
+			return (get_pexel_from_img(&cub3d->textures[DOOR], x, y));
+		if (cub3d->map->player.direction == WE)
+			return (get_pexel_from_img(&cub3d->textures[WE] , x, y));
+		return (get_pexel_from_img(&cub3d->textures[EA], x, y));
 	}
 	else
 	{
 		x = (int)cub3d->draw->wallHitX % SIZE;
 		y = (i + my) / size;
-		//if (cub3d->draw.type == 'D')
-		//	return (get_pexel_from_img(&cub3d->imgs.door, x, y));
-		//if (cub3d->map->player.y - cub3d->draw->wallHitY > 0)
-		//	return (get_pexel_from_img(&cub3d->textures[NO], x, y));
-		return (get_pexel_from_img(cub3d->no_texture, x, y));
+		if (cub3d->draw->wallHitContent == 'D')
+			return (get_pexel_from_img(&cub3d->textures[DOOR], x, y));
+		if (cub3d->map->player.direction == NO)
+			return (get_pexel_from_img(&cub3d->textures[NO], x, y));
+		return (get_pexel_from_img(&cub3d->textures[SO], x, y));
 	}
 	return (0);
 }

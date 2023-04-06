@@ -6,7 +6,7 @@
 /*   By: hidhmmou <hidhmmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:11:07 by hidhmmou          #+#    #+#             */
-/*   Updated: 2023/04/05 22:48:12 by hidhmmou         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:49:02 by hidhmmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define ESC 53
 # define OPEN_DOOR 14
 # define CLOSE 17
-# define HORIZONTAL 1
-# define VERTICAL 2
+# define HORIZONTAL 0
+# define VERTICAL 1
 # define PI 3.14159265358979323846264338327950288
 # define WIDTH 1280
 # define HEIGHT 720
@@ -54,7 +54,7 @@
 # define ROTATE_ANGLE 5
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define P 3.14159265
-# define SPEED 16
+# define SPEED 32
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
 # define MIDDLE_CLICK 3
@@ -143,7 +143,8 @@ enum e_texture
 	NO,
 	SO,
 	WE,
-	EA
+	EA,
+	DOOR
 };
 
 enum e_key
@@ -178,7 +179,7 @@ typedef struct s_cub3d
 {
 	t_img		*img_2d;
 	t_img		*img;
-	t_img		textures[4];
+	t_img		textures[5];
 	t_img		*no_texture;
 	t_img		*img_weapon;
 	t_map		*map;
@@ -199,7 +200,7 @@ typedef struct s_cub3d
 	int 		facing_close_door;
 	int 		facing_open_door;
 	int 		pid;
-	
+	int			ray_hit_direction;
 }	t_cub3d;
 
 
